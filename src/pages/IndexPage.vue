@@ -169,7 +169,7 @@
           </div>
           <q-card-section v-if="all_data.length > 1">
             <div v-for="(line, i) in all_data" :key="i">
-              <div><b>Найденный фрагмент {{ i+1 }}</b></div>
+              <div><b>Сообщение {{ i+1 }}</b></div>
               <div>Исходный текст сообщения: {{ line.text }}</div>
               <div>Текст в нормальной форме: {{ line.normal_form }}</div>
               <div>
@@ -195,12 +195,15 @@
               Найденные активные эксплоиты в корпоративных диалоговых текстах:
             </div>
           </q-card-section>
-          <q-card-section>
+          <q-card-section class="q-gutter-lg">
+
+            <div><q-select filled v-model="ttype" :options="options" label="Выберите алгоритм" /></div>
+            <div>
             <q-btn
               color="primary"
               label="Поиск активных эксплоитов"
-              @click="onFindAE"
-            />
+              @click="onFindCL"
+            /></div>
           </q-card-section>
           <!-- <q-card-section>
             {{ filename }}
@@ -233,11 +236,15 @@ export default {
       hostae_uploadae: cfg.hostae_uploadae,
       chatmessages: "",
       proc_text: ref(""),
+      ttype: ref(""),
       resp_text: ref(""),
       resp_data: ref(""),
       all_data: ref([{}]),
       ae_data: ref([{}]),
       filename: ref(""),
+      options: [
+        'RAKE', 'YAKE', 'BERT'
+      ]
     };
   },
   methods: {
@@ -288,11 +295,14 @@ export default {
       });
       console.log(response);
     },
-    async onFindAE() {
+    async onFindCL() {
       const response = await axios({
         method: "post",
         url: cfg.hostae + "findae",
-        data: this.filename,
+        data: {
+          filename: this.filename,
+          type: this.ttype
+        },
         headers: {
           "Content-Type": "application/json",
         },
