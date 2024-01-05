@@ -11,8 +11,7 @@
           <q-card-section>
             <q-uploader
               :url="hostae_uploadae"
-              label="Загрузите свои данные
-            .json, chatMessages/*"
+              label="Загрузите свои данные .json, chatMessages/*"
               square
               flat
               bordered
