@@ -13,7 +13,6 @@
               :url="hostae_uploadae"
               label="Загрузите свои данные
             .json, chatMessages/*"
-              color="green"
               square
               flat
               bordered
@@ -123,7 +122,7 @@
         <div>
           <q-card-section>
             <div class="text-h6">
-              Получение сжатых портретов (суммаризация) текстов:
+              Получение сигнатур (сжатых портретов) скомпроментированных сообщений:
             </div>
           </q-card-section>
           <q-input
@@ -137,7 +136,7 @@
             <q-btn color="primary" label="Обработать" @click="onProc" />
           </q-card-section>
           <q-card-section>
-            <div class="text-h6">Полученный портрет:</div>
+            <div class="text-h6">Полученная сигнатура (сжатый портрет):</div>
           </q-card-section>
           <q-input
             class="inputtext"
@@ -171,17 +170,17 @@
           </div>
           <q-card-section v-if="all_data.length > 1">
             <div v-for="(line, i) in all_data" :key="i">
+              <div><b>Найденный фрагмент {{ i+1 }}</b></div>
               <div>Исходный текст сообщения: {{ line.text }}</div>
-              <div>Очищенный текст: {{ line.remove_all }}</div>
               <div>Текст в нормальной форме: {{ line.normal_form }}</div>
               <div>
-                Ключевые слова по алгоритму Rake: {{ line.Rake_Summarizer }}
+                Ключевые слова по алгоритму Rake: {{ line.RAKE }}
               </div>
               <div>
-                Ключевые слова по алгоритму Yake: {{ line.YakeSummarizer }}
+                Ключевые слова по алгоритму Yake: {{ line.YAKE }}
               </div>
               <div>
-                Ключевые слова по алгоритму BERT: {{ line.BERT_Summarizer }}
+                Ключевые слова по алгоритму BERT: {{ line.BERT }}
               </div>
               <br />
             </div>
@@ -194,7 +193,7 @@
         <div>
           <q-card-section>
             <div class="text-h6">
-              Найденные активные эксплоиты в корпоративном комьюнити:
+              Найденные активные эксплоиты в корпоративных диалоговых текстах:
             </div>
           </q-card-section>
           <q-card-section>
@@ -211,9 +210,11 @@
       </div>
       <q-card-section v-if="ae_data.length > 0">
         <div v-for="(line, i) in ae_data" :key="i">
-          <div>Исходный текст сообщения: {{ line.text }}</div>
-          <div>Очищенный текст: {{ line.remove_all }}</div>
-          <div>Текст в нормальной форме: {{ line.normal_form }}</div>
+          <div><b>Найденный фрагмент &nbsp; {{ i+1 }}</b></div>
+          <div><b>Исходный текст сообщения:</b> {{ line.text }}</div>
+          <div><b>RAKE: </b>{{ line.RAKE }}</div>
+          <div><b>YAKE:</b> {{ line.YAKE }}</div>
+          <div><b>BERT: </b>{{ line.BERT }}</div>
           <br />
         </div> </q-card-section
     ></q-card>
