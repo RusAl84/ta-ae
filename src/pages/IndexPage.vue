@@ -326,7 +326,7 @@ export default {
 .chatmessages
   padding: 10px
   margin: 10px
-.flexrow
+.flexrowЁ
   display: flex
   flex-flow: row wrap
   justify-content: flex-start
